@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { ReactComponent as StopImage} from '../stop.svg'
 import { ReactComponent as ExampleImage} from '../ExampleImage.svg'
 import Percentage from './Percentage';
-
+import UrlLink from './UrlLink';
 function Main() {
   return (
     <Container>
@@ -41,7 +41,7 @@ function Main() {
             </SmallText>
           </div>
           <ButtonBox>
-            <SubmitBtn>
+            <SubmitBtn >
               개훌륭 강형욱 분노
             </SubmitBtn>
             <SubmitBtn>
@@ -52,6 +52,8 @@ function Main() {
             </SubmitBtn>
           </ButtonBox>
         </div>
+
+        <UrlLink/>
 
         <footer>
         <StopImage max-height="30"/>
@@ -138,10 +140,9 @@ const Container = styled.div`
   }
   .Ex{
     display : flex;
-    justify-content : space-between;
+    justify-content : space-around;
     height : 140px;
-    margin : 80px;
-    margin-top : 130px;
+    margin : 130px 80px 0px 80px;
 
   }
   .foot-text{
