@@ -84,8 +84,12 @@ def get_video_info(request):
         video['publishedAt'] = video_api_response['snippet']['publishedAt']
         video['description'] = video_api_response['snippet']['description']
         video['viewCount'] = video_api_response['statistics']['viewCount']
-        video['likeCount'] = video_api_response['statistics']['likeCount']
-        video['dislikeCount'] = video_api_response['statistics']['dislikeCount']
+        try: 
+          video['likeCount'] = video_api_response['statistics']['likeCount']
+          video['dislikeCount'] = video_api_response['statistics']['dislikeCount']
+        except:
+          video['likeCount'] = ''
+          video['dislikeCount'] = ''
         channelId = video_api_response['snippet']['channelId']
 
         #getting channel info
