@@ -9,6 +9,8 @@ import search from '../img/search.png';
 import youtubeRight from '../img/youtube-right.png';
 import likeBtn from '../img/like.png';
 import dislikeBtn from '../img/dislike.png';
+import infoRight from '../img/info-right.png';
+
 import Comment from './components/Comment';
 
 // Header
@@ -77,7 +79,6 @@ const InfoGroup = styled.div`
     display: flex;
     justify-content: space-between;
     margin-top: 15px;
-    padding-bottom: 15px;
     font-size: 14px;
     color: #606060;
     border-bottom: 1px solid #e0e0e0;
@@ -101,21 +102,29 @@ const UploadDate = styled.div`
 const LikesDiv = styled.div`
     display: flex;
     align-items: center;
-    border-bottom: 1px solid #888888;
+    border-bottom: 2px solid #888888;
+    margin: 0 10px;
+    padding-bottom: 5px;
   `;
 const LikeBtn = styled.img`
     height: 30px;
     margin-right: 5px;
-    margin-bottom: 10px;
   `;
 const LikeNum = styled.div`
+    font-weight: 600;
     color: #888888;
+    margin-right: 15px;
   `;
 const DislikeBtn = styled.img`
-    height: 30px;
+    height: 33px;
+    margin-right: 5px;
   `;
 const DislikeNum = styled.div`
+  font-weight: 600;
     color: #888888;
+  `;
+const ShareImg = styled.img`
+    height: 35px;
   `;
 
 
@@ -171,6 +180,7 @@ function YoutubePreview() {
                 <DislikeBtn src={dislikeBtn} />
                 <DislikeNum>72</DislikeNum>
               </LikesDiv>
+              <ShareImg src={infoRight} alt="info-right"/>
 
             </InfoRightGroup>
           </InfoGroup>
