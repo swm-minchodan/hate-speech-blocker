@@ -1,11 +1,21 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+import styled from 'styled-components';
+
+const Header = styled.div`
+  display: flex;
+  align-items: center;
+  height: 56px;
+  `;
 
 function YoutubePreview() {
   return (
     <>
-      <div className="header">
+      <Header>
+        <FontAwesomeIcon icon={faBars} />
+      </Header>
 
-      </div>
       <div className="content">
         <div className="youtube-iframe">
           <iframe width="896" height="504" src="https://www.youtube.com/embed/oF6FrcRQJ8k" title="YouTube video player"
