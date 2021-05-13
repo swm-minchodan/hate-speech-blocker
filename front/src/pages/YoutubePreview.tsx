@@ -31,7 +31,7 @@ export type commentState = {
 type videoState = {
   description: string,
   dislikeCount: string,
-  likeCount: string,
+  likeCount?: string,
   publishedAt: string,
   title: string,
   viewCount: string

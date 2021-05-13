@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import parse from 'html-react-parser';
 
 import likeBtn from '../../img/like.png';
 import dislikeBtn from '../../img/dislike.png';
@@ -10,6 +11,7 @@ const CommentDiv = styled.div`
   display: flex;
   width: 100%;
   margin-bottom: 16px;
+  white-space: pre;
 `;
 const AuthorThumbnail = styled.div`
     font-family: Roboto, Arial, sans-serif;
@@ -59,6 +61,8 @@ const Content = styled.div`
   background-color: #f9f9f9;
   font-size: 14px;
   line-height: 20px;
+  width: 1000px;
+  white-space: pre-wrap;
 `;
 
 const ActionButtons = styled.div`
@@ -103,7 +107,7 @@ function Comment({ props }: { props: commentState}) {
           <HeaderAuthor>{props.author}</HeaderAuthor>
           <HeaderTime>{formatDate(props.date)}</HeaderTime>
         </Header>
-        <Content>{props.comment}️</Content>
+        <Content>{parse(props.comment)}️</Content>
         <ActionButtons>
           <LikeImg src={likeBtn}></LikeImg>
           <LikeNum>{props.numLikes}</LikeNum>
