@@ -60,7 +60,7 @@ const SearchWrapper = styled.div`
 
 
 function Percentage() {
-  const [sentence, setSentence] = useState<string>('')
+  const [sentence, setSentence] = useState<string>('www.youtube.com/')
 
   axios.defaults.xsrfCookieName = 'csrftoken';
   axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -87,7 +87,7 @@ function Percentage() {
     <Second>
       <SearchWrapper>
         <SearchBox
-            placeholder="Youtube URL을 입력하교 혐오댓글을 검열해보세요"
+            placeholder="Youtube URL을 입력하고 혐오댓글을 검열해보세요"
             value={sentence}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSentence(e.target.value)}
             onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => enterSearch(e)}

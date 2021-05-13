@@ -159,7 +159,7 @@ const Container = styled.div`
   }
   .Ex{
     display : flex;
-    justify-content : space-around;
+    justify-content : space-between;
     height : 140px;
     margin : 130px 80px 0px 80px;
 
@@ -192,6 +192,7 @@ const BigText=styled.div`
   font-style: normal;
   line-height: 45px;
   font-weight: bold;
+  color: rgba(31, 32, 65, 0.75);
   span{
     color : rgb(127,192,128);
   }
