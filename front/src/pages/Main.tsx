@@ -3,13 +3,10 @@ import styled from 'styled-components'
 import StopImage from '../images/stop.svg'
 import { ReactComponent as ExampleImage} from '../images/ExampleImage.svg'
 import Percentage from './Percentage';
-<<<<<<< HEAD
 import UrlLink from './UrlLink';
-=======
 import decorator2Svg from '../images/decorator2.svg';
 import decorator1Svg from '../images/decorator1.svg';
 
->>>>>>> bd01a2b480e05ebc6450f32bc20f2fb8572c2d29
 function Main() {
   return (
     <Container>
@@ -61,16 +58,10 @@ function Main() {
           </ButtonBox>
         </div>
 
-<<<<<<< HEAD
         <UrlLink/>
-
-        <footer>
-        <StopImage max-height="30"/>
-=======
       </MainComponent>
       <Footer>
         <FooterLogo src={StopImage} />
->>>>>>> bd01a2b480e05ebc6450f32bc20f2fb8572c2d29
         <div className="foot-text">
           <div>
             혐오 표현이 없는  <br/>클린한 인터넷 문화를 응원합니다
