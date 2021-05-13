@@ -29,24 +29,42 @@ def get_comment(request):
         
         comments = list()
         api_obj = build('youtube', 'v3', developerKey=api_key)
-        response = api_obj.commentThreads().list(part='snippet,replies', videoId=video_id, maxResults=30, order='relevance').execute()
-        
-        while response:
-            for item in response['items']:
-                yt_comment = item['snippet']['topLevelComment']['snippet']
-                comment = {}
 
-                #mapping logic
-                percentage = filtering(yt_comment['textDisplay'])
-                comment["comment"] = yt_comment['textDisplay']
-                if percentage > threshold:
-                  comment["comment"] = "혐오 표현이 감지되어 블라인드 처리된 댓글입니다"
-                  
-                comment["author"] = yt_comment['authorDisplayName']
-                comment["author_image_url"] = yt_comment['authorProfileImageUrl']
-                comment["date"] = yt_comment['publishedAt']
-                comment["num_likes"] = yt_comment['likeCount']
+        #getting comments
+        comments_api_response = api_obj.commentThreads().list(part='snippet,replies', videoId=video_id, maxResults=30, order='relevance').execute()
+        
+        while comments_api_response:
+            for item in comments_api_response['items']:
+                comment = {}
+                comment_api = item['snippet']['topLevelComment']['snippet']
+
+                comment["comment"] = comment_api['textDisplay']
+                comment["author"] = comment_api['authorDisplayName']
+                comment["authorImageUrl"] = comment_api['authorProfileImageUrl']
+                comment["date"] = comment_api['publishedAt']
+                comment["numLikes"] = comment_api['likeCount']
 
                 comments.append(comment)
             break
-        return JsonResponse({"comments": comments}, safe=False)
+
+        #getting video info
+        video_api_response = api_obj.videos().list(part='snippet,statistics', id=video_id).execute()['items'][0]
+        video = {}
+        video['title'] = video_api_response['snippet']['title']
+        video['publishedAt'] = video_api_response['snippet']['publishedAt']
+        video['description'] = video_api_response['snippet']['description']
+        video['viewCount'] = video_api_response['statistics']['viewCount']
+        video['likeCount'] = video_api_response['statistics']['likeCount']
+        video['dislikeCount'] = video_api_response['statistics']['dislikeCount']
+        channelId = video_api_response['snippet']['channelId']
+
+        #getting channel info
+        channel = {}
+        channel_api_response = api_obj.channels().list(part='snippet,statistics', id=channelId).execute()['items'][0]
+        channel['name'] = channel_api_response['snippet']['title']
+        channel['imageUrl'] = channel_api_response['snippet']['thumbnails']['default']['url']
+        channel['hiddenSubscriberCount'] = channel_api_response['statistics']['hiddenSubscriberCount']
+        if channel['hiddenSubscriberCount'] == False:
+            channel['subscriberCount'] = channel_api_response['statistics']['subscriberCount']
+
+        return JsonResponse({"video": video, "channel": channel, "comments": comments}, safe=False)
