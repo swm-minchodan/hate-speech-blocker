@@ -1,20 +1,28 @@
 import React from 'react';
 import styled from 'styled-components'
-import { ReactComponent as StopImage} from '../stop.svg'
-import { ReactComponent as ExampleImage} from '../ExampleImage.svg'
+import StopImage from '../images/stop.svg'
+import { ReactComponent as ExampleImage} from '../images/ExampleImage.svg'
 import Percentage from './Percentage';
+<<<<<<< HEAD
 import UrlLink from './UrlLink';
+=======
+import decorator2Svg from '../images/decorator2.svg';
+import decorator1Svg from '../images/decorator1.svg';
+
+>>>>>>> bd01a2b480e05ebc6450f32bc20f2fb8572c2d29
 function Main() {
   return (
     <Container>
       <header>
-        <StopImage id="head-image"/>
+        <TopLogo src={StopImage} id="head-image"/>
         <div >
           <BigText>멈춰!</BigText>
           <div id="head-text">혐오 표현 필터링</div>
         </div>
       </header>
       <MainComponent>
+        <Decorator1 src={decorator1Svg} />
+        <Decorator2 src={decorator2Svg} />
         <div className="info">
           <div className="info-text">
             <BigText>
@@ -53,10 +61,16 @@ function Main() {
           </ButtonBox>
         </div>
 
+<<<<<<< HEAD
         <UrlLink/>
 
         <footer>
         <StopImage max-height="30"/>
+=======
+      </MainComponent>
+      <Footer>
+        <FooterLogo src={StopImage} />
+>>>>>>> bd01a2b480e05ebc6450f32bc20f2fb8572c2d29
         <div className="foot-text">
           <div>
             혐오 표현이 없는  <br/>클린한 인터넷 문화를 응원합니다
@@ -66,18 +80,21 @@ function Main() {
             개발기 및 코드 구경가기
           </div >
         </div>
-        </footer>
-      </MainComponent>
+      </Footer>
     </Container>
   );
 }
 
+const TopLogo = styled.img`
+  width: 80px;
+  height: 80px;
+  margin: 10px;
+`
 const ButtonBox = styled.div`
   display : flex;
-  justify-content : space-around;
+  justify-content : space-between;
   align-items : center;
   width : 600px;
-
 `
 
 const SubmitBtn = styled.a`
@@ -98,7 +115,30 @@ const SubmitBtn = styled.a`
 `
 
 const MainComponent = styled.div`
+  position: relative;
   width: 1440px;
+`
+
+const Footer = styled.div`
+  width: 100%;
+  display : flex;
+  align-items : center;
+  justify-content: space-between; 
+  background-color : white;
+  border-top : 1px solid rgba(31, 32, 65, 0.25);
+  bottom : 0;
+  width : 100%;
+  height : 5%;
+  min-height : 20px;
+  overflow : hidden;
+  font-size: calc(3px + 1vmin);
+  padding: 26px 33px;
+  box-sizing: border-box;
+`
+
+const FooterLogo = styled.img`
+  width: 60px;
+  height: 60px;
 `
 
 const Container = styled.div`
@@ -114,18 +154,6 @@ const Container = styled.div`
     max-height: 70px;
     margin : 30px;
     width : 1440px;
-  }
-  footer{
-    display : flex;
-    align-items : center;
-    background-color : white;
-    border-top : 3px solid #111111;
-    bottom : 0;
-    width : 100%;
-    height : 5%;
-    min-height : 20px;
-    overflow : hidden;
-    font-size: calc(3px + 1vmin);
   }
   .info{
     display : flex;
@@ -146,16 +174,13 @@ const Container = styled.div`
 
   }
   .foot-text{
-  display : flex;
-  width : 100%;
-  justify-content : space-between;  
+    display : flex;
+    width : 100%;
+    justify-content : space-between;  
+    margin-left: 13px;
   }
   .copy{
   text-align:end;
-  }
-  #head-image{
-    height : 90%;
-    margin : 10px;
   }
   #head-text{
     font-family: Mulish;
@@ -193,5 +218,21 @@ const SmallText=styled.div`
   color: #1F2041;
   opacity : 0.5;
 `
+const Decorator1 = styled.img`
+  position: absolute;
+  width: 517.11px;
+  height: 460.83px;
+  left: 400px;
+  top: -100px;
+`
+
+const Decorator2 = styled.img`
+  position: absolute;
+  width: 503.6px;
+  height: 386.29px;
+  left: 77.3px;
+  top: 330px;
+`
+
 
 export default Main;

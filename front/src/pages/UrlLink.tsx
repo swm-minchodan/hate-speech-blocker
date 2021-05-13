@@ -150,7 +150,7 @@ function Percentage() {
     <Second>
       <SearchWrapper>
         <SearchBox
-            placeholder="Youtube URL을 입력하교 혐오댓글을 검열해보세요"
+            placeholder="Youtube URL을 입력하교 혐오댓글을 검열해보세요b"
             value={sentence}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSentence(e.target.value)}
             onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => enterSearch(e)}
