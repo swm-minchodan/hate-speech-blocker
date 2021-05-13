@@ -7,7 +7,7 @@ function YoutubePreview() {
   
   useEffect(() => {
     async function axiosPostTest() : Promise<number> { 
-      return await axios.post(`/getcomment`, {'url': '3ScrmGDJjqk'})
+      return await axios.post(`/getvideoinfo`, {'url': '3ScrmGDJjqk'})
       .then(res => {console.log(res.data); return res.data;});
     }
     axiosPostTest();

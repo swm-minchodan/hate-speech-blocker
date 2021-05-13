@@ -3,5 +3,5 @@ from mainpage import views
 
 urlpatterns = [
     path('percentage', views.get_percentage, name='get_percentage'),
-    path('getcomment', views.get_comment, name='get_comment')
+    path('getvideoinfo', views.get_video_info, name='get_video_info')
 ]

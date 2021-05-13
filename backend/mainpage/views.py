@@ -21,7 +21,7 @@ def get_percentage(request):
         sentence = data['sentence']
         return JsonResponse(len(sentence), safe=False)
 
-def get_comment(request):
+def get_video_info(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         video_id = data['url']
