@@ -79,8 +79,17 @@ function UrlLink({history} : RouteComponentProps<{}>) {
   }
 
   async function onSubmit() {
-      goPreview(url)
+    var img = new Image();
+		img.src = "http://img.youtube.com/vi/" + url + "/mqdefault.jpg";
+		img.onload = function () {
+			if(img.width === 120){
+        alert("유효하지 않은 url 입니다");
+        return
+      } else {
+        goPreview(url)
       setUrl('')
+      }
+		}
   }
 
   return (
