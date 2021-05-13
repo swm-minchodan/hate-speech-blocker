@@ -26,7 +26,8 @@ export type commentState = {
   authorImageUrl: string,
   comment: string,
   date: string,
-  numLikes: number
+  numLikes: number,
+  blinded: number
 }
 type videoState = {
   description: string,
@@ -233,7 +234,6 @@ function YoutubePreview({ match }: RouteComponentProps<PreviewRouterProps>) {
 
   useEffect( () => {
     async function axiosTest() {
-      console.log(match.params.url)
       const result = await axios.post(`/getvideoinfo`,{ url : match.params.url })
         .then(res => res.data);
       setPreviewState(result);

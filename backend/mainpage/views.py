@@ -10,7 +10,7 @@ from tensorflow import keras
 import pickle
 import os
 
-threshold = 50
+threshold = 60
 
 okt = Okt()
 k_tokenizer = pickle.load(open(os.path.join(os.getcwd(),"AI/keras_tokenizer.pkl"), "rb"))
@@ -39,9 +39,6 @@ hate_evaluate('');
 @method_decorator(csrf_exempt, name='dispatch')
 
 # Create your views here.
-def filtering(sentence):
-    return 0
-
 def get_percentage(request):
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -65,8 +62,13 @@ def get_video_info(request):
             for item in comments_api_response['items']:
                 comment = {}
                 comment_api = item['snippet']['topLevelComment']['snippet']
-
-                comment["comment"] = comment_api['textDisplay']
+                result = hate_evaluate(comment_api['textDisplay'])
+                if result > threshold:
+                  comment["comment"] = '혐오 표현이 감지되어 블라인드 처리된 댓글입니다.'
+                  comment["blinded"] = 1
+                else:
+                  comment["comment"] = comment_api['textDisplay']
+                  comment["blinded"] = 0
                 comment["author"] = comment_api['authorDisplayName']
                 comment["authorImageUrl"] = comment_api['authorProfileImageUrl']
                 comment["date"] = comment_api['publishedAt']

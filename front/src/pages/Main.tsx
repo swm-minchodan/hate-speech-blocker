@@ -23,7 +23,7 @@ const Main: FC<RouteComponentProps> = (props: RouteComponentProps<{}>) => {
         <Information/>
         <Percentage/>
         <Example {...props} />
-        <UrlLink/>
+        <UrlLink {...props} />
       </MainComponent>
       <Footer/>
     </Container>

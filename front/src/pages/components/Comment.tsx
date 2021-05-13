@@ -61,6 +61,15 @@ const Content = styled.div`
   line-height: 20px;
 `;
 
+const GreenContent = styled.div`
+  font-family: Roboto, Arial, sans-serif;
+  background-color: #f9f9f9;
+  font-size: 14px;
+  line-height: 20px;
+  color: #2C8721;
+  font-weight: bold;
+`;
+
 const ActionButtons = styled.div`
   font-family: Roboto, Arial, sans-serif;
   background-color: #f9f9f9;
@@ -103,7 +112,7 @@ function Comment({ props }: { props: commentState}) {
           <HeaderAuthor>{props.author}</HeaderAuthor>
           <HeaderTime>{formatDate(props.date)}</HeaderTime>
         </Header>
-        <Content>{props.comment}️</Content>
+        {props.blinded? <GreenContent>{props.comment}️</GreenContent> : <Content>{props.comment}️</Content>}
         <ActionButtons>
           <LikeImg src={likeBtn}></LikeImg>
           <LikeNum>{props.numLikes}</LikeNum>
