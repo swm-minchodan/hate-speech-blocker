@@ -5,6 +5,7 @@ import { ReactComponent as ExampleImage} from '../images/ExampleImage.svg'
 import Percentage from './Percentage';
 import decorator2Svg from '../images/decorator2.svg';
 import decorator1Svg from '../images/decorator1.svg';
+import decorator3Svg from '../images/decorator3.svg';
 
 function Main() {
   return (
@@ -19,6 +20,7 @@ function Main() {
       <MainComponent>
         <Decorator1 src={decorator1Svg} />
         <Decorator2 src={decorator2Svg} />
+        <Decorator3 src={decorator3Svg} />
         <div className="info">
           <div className="info-text">
             <BigText>
@@ -101,6 +103,7 @@ const SubmitBtn = styled.a`
     justify-content: center;
     text-transform: uppercase;
     color: #FFFFFF;
+    z-index: 2;
 `
 
 const MainComponent = styled.div`
@@ -168,9 +171,11 @@ const Container = styled.div`
     width : 100%;
     justify-content : space-between;  
     margin-left: 13px;
+    color: rgba(31, 32, 65, 0.75);
   }
   .copy{
-  text-align:end;
+    text-align:end;
+    color: rgba(31, 32, 65, 0.75);
   }
   #head-text{
     font-family: Mulish;
@@ -180,6 +185,8 @@ const Container = styled.div`
     line-height: 25px;
     display: flex;
     align-items: center;
+    color: rgba(31, 32, 65, 0.75);
+    mix-blend-mode: normal;
   }
   #co{
     color : rgb(127,192,128);
@@ -191,6 +198,8 @@ const BigText=styled.div`
   font-style: normal;
   line-height: 45px;
   font-weight: bold;
+  color: rgba(31,32,65,0.75);
+  mix-blend-mode: normal;
   span{
     color : rgb(127,192,128);
   }
@@ -224,5 +233,12 @@ const Decorator2 = styled.img`
   top: 330px;
 `
 
+const Decorator3 = styled.img`
+  position: absolute;
+  width: 400px;
+  height: 300px;
+  right: -20px;
+  bottom: 0px;
+`
 
 export default Main;
