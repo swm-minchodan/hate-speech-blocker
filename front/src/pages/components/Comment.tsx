@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import likeBtn from '../../img/like.png';
 import dislikeBtn from '../../img/dislike.png';
 
+import { commentState } from '../YoutubePreview';
+
 const CommentDiv = styled.div`
   display: flex;
   width: 100%;
@@ -85,22 +87,26 @@ const LikeNum = styled.div`
   font-size: 12px;
 `
 
-function Comment() {
+function formatDate(str: string) {
+  return str.substr(0,4) + ". " + str.substr(5,2) + ". " + str.substr(8,2);
+}
+
+function Comment({ props }: { props: commentState}) {
   return (
     <CommentDiv>
       <AuthorThumbnail>
-        <AuthorImg src={"https://yt3.ggpht.com/ytc/AAUvwnhXCuEaZlYMurC8Yrm9MTmNN0dcGW7XANyuRKV-0Q=s48-c-k-c0xffffffff-no-rj-mo"}>
+        <AuthorImg src={props.authorImageUrl}>
         </AuthorImg>
       </AuthorThumbnail>
       <Main>
         <Header>
-          <HeaderAuthor>Bagusbrahmantya _</HeaderAuthor>
-          <HeaderTime>43분 전</HeaderTime>
+          <HeaderAuthor>{props.author}</HeaderAuthor>
+          <HeaderTime>{formatDate(props.date)}</HeaderTime>
         </Header>
-        <Content>OH MY GIRL has many international fans, <br/>and one of them is you who read this comment. <br/>OT7❤️</Content>
+        <Content>{props.comment}️</Content>
         <ActionButtons>
           <LikeImg src={likeBtn}></LikeImg>
-          <LikeNum>40</LikeNum>
+          <LikeNum>{props.numLikes}</LikeNum>
           <DislikeImg src={dislikeBtn}></DislikeImg>
         </ActionButtons>
       </Main>

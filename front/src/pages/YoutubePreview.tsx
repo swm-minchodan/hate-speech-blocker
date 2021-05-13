@@ -20,7 +20,7 @@ type channelState = {
   imageUrl: string,
   name: string
 }
-type commentState = {
+export type commentState = {
   author: string,
   authorImageUrl: string,
   comment: string,
@@ -38,7 +38,7 @@ type videoState = {
 
 type PreviewState = {
   channel: channelState,
-  comment: Array<commentState>,
+  comments: Array<commentState>,
   video: videoState
 }
 
@@ -46,7 +46,6 @@ type PreviewState = {
 const Preview = styled.div`
     font-family: Roboto, Arial, sans-serif;
     background-color: #f9f9f9;
-    height: 2000px;
   `;
 const HeaderContainer = styled.div`
     position: fixed;
@@ -304,8 +303,8 @@ function YoutubePreview() {
               </Subscribers>
 
               <ChannelIntro>
-                {previewState.video ? previewState.video.description.split('\n').map(line => {
-                    return (<span>{line}<br/></span>)
+                {previewState.video ? previewState.video.description.split('\n').map((line, idx) => {
+                    return (<span key={idx}>{line}<br/></span>)
                   }) : ""}
               </ChannelIntro>
             </ChannelInfoDiv>
@@ -318,9 +317,9 @@ function YoutubePreview() {
             <TotalComment>
               댓글 30개
             </TotalComment>
-            <Comment />
-            <Comment />
-            <Comment />
+            {previewState.comments ? previewState.comments.map((comment, idx) => {
+              return <Comment key={idx} props={comment} />
+            }) : ""}
           </CommentGroup>
 
         </Content>
