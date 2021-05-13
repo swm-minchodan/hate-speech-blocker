@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import arrowSvg from '../images/arrow.svg';
+import { RouteComponentProps } from 'react-router-dom';
 
 const Wrapper = styled.div`
     display: flex;
@@ -61,16 +62,14 @@ const ArrowImg = styled.img`
 `
 
 
-function UrlLink() {
+function UrlLink({history} : RouteComponentProps<{}>) {
   const [url, setUrl] = useState<string>('')
 
   axios.defaults.xsrfCookieName = 'csrftoken';
   axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
-
-  async function getPercentage(url: string) : Promise<number> { 
-    return await axios.post(`/percentage`,{ url })
-    .then(res => res.data);
+  const goPreview = (url:string) => {
+    history.push('/preview/'+url);
   }
 
   const enterSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -80,6 +79,7 @@ function UrlLink() {
   }
 
   async function onSubmit() {
+      goPreview(url)
       setUrl('')
   }
 
