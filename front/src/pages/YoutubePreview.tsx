@@ -13,6 +13,7 @@ import dislikeBtn from '../img/dislike.png';
 import infoRight from '../img/info-right.png';
 
 import Comment from './components/Comment';
+import { RouteComponentProps } from 'react-router';
 
 type channelState = {
   hiddenSubscriberCount: boolean,
@@ -223,13 +224,18 @@ function formatDate(str: string) {
   return str.substr(0,4) + ". " + str.substr(5,2) + ". " + str.substr(8,2);
 }
 
+interface PreviewRouterProps {
+  url: string;
+}
 
-function YoutubePreview() {
+
+function YoutubePreview({ match }: RouteComponentProps<PreviewRouterProps>) {
   const [previewState, setPreviewState] = useState({} as PreviewState);
 
   useEffect( () => {
     async function axiosTest() {
-      const result = await axios.post(`/getvideoinfo`,{ url : '3ScrmGDJjqk'})
+      console.log(match.params.url)
+      const result = await axios.post(`/getvideoinfo`,{ url : match.params.url })
         .then(res => res.data);
       setPreviewState(result);
     }
@@ -259,7 +265,7 @@ function YoutubePreview() {
         <Content>
           <div className="youtube-iframe">
             <iframe width="1200" height="700"
-                    src={"https://www.youtube.com/embed/"}
+                    src={"https://www.youtube.com/embed/"+match.params.url}
                     title="YouTube video player"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
