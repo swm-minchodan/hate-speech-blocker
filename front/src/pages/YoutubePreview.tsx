@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
 import { faMicrophone } from '@fortawesome/free-solid-svg-icons';
@@ -13,6 +13,34 @@ import dislikeBtn from '../img/dislike.png';
 import infoRight from '../img/info-right.png';
 
 import Comment from './components/Comment';
+
+type channelState = {
+  hiddenSubscriberCount: boolean,
+  subscriberCount?: number,
+  imageUrl: string,
+  name: string
+}
+type commentState = {
+  author: string,
+  authorImageUrl: string,
+  comment: string,
+  date: string,
+  numLikes: number
+}
+type videoState = {
+  description: string,
+  dislikeCount: string,
+  likeCount: string,
+  publishedAt: string,
+  title: string,
+  viewCount: string
+}
+
+type PreviewState = {
+  channel: channelState,
+  comment: Array<commentState>,
+  video: videoState
+}
 
 // Header
 const Preview = styled.div`
@@ -143,7 +171,7 @@ const ChannelDiv = styled.div`
 const AvatarDiv = styled.div`
     display: flex;
     align-items: start;
-    width: 65px;
+    width: 75px;
   `;
 const Avatar = styled.img`
     height: 50px;
@@ -182,13 +210,28 @@ const SubscribeBtn = styled.div`
     padding: 8px 10px;
   `;
 
+const CommentGroup = styled.div`
+    margin: 20px 0;
+  `;
+const TotalComment = styled.div`
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 25px;
+  `;
+
+function formatDate(str: string) {
+  return str.substr(0,4) + ". " + str.substr(5,2) + ". " + str.substr(8,2);
+}
+
 
 function YoutubePreview() {
+  const [previewState, setPreviewState] = useState({} as PreviewState);
+
   useEffect( () => {
     async function axiosTest() {
       const result = await axios.post(`/getvideoinfo`,{ url : '3ScrmGDJjqk'})
         .then(res => res.data);
-      console.log(result);
+      setPreviewState(result);
     }
     axiosTest();
   }, [])
@@ -215,27 +258,30 @@ function YoutubePreview() {
       <ContentContainer>
         <Content>
           <div className="youtube-iframe">
-            <iframe width="1200" height="700" src="https://www.youtube.com/embed/oF6FrcRQJ8k" title="YouTube video player"
+            <iframe width="1200" height="700"
+                    src={"https://www.youtube.com/embed/"}
+                    title="YouTube video player"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen />
           </div>
           <Title>
-            4억 날리고 행복해하는 전기(머니게임 편집)
+            {previewState.video ? previewState.video.title : ""}
           </Title>
           <InfoGroup>
             <InfoLeftGroup>
-              <TotalViews>조회수 317,421회</TotalViews>
+              <TotalViews>조회수 {previewState.video ? previewState.video.viewCount : ""}회</TotalViews>
               <SeparateDot>•</SeparateDot>
-              <UploadDate>2021. 5. 11.</UploadDate>
+              <UploadDate>{previewState.video ?
+                formatDate(previewState.video.publishedAt) : ""}</UploadDate>
             </InfoLeftGroup>
 
             <InfoRightGroup>
               <LikesDiv>
                 <LikeBtn src={likeBtn} />
-                <LikeNum>3천</LikeNum>
+                <LikeNum>{previewState.video ? previewState.video.likeCount : ""}</LikeNum>
                 <DislikeBtn src={dislikeBtn} />
-                <DislikeNum>72</DislikeNum>
+                <DislikeNum>{previewState.video ? previewState.video.dislikeCount : ""}</DislikeNum>
               </LikesDiv>
               <ShareImg src={infoRight} alt="info-right"/>
 
@@ -244,20 +290,23 @@ function YoutubePreview() {
 
           <ChannelDiv>
             <AvatarDiv>
-              <Avatar src="https://yt3.ggpht.com/ytc/AAUvwniilTW5nRRIbfnyw7_NAxnMhD8g7MkL6fMMkZZ8hg=s176-c-k-c0x00ffffff-no-rj" alt="avatar" />
+              <Avatar src={previewState.channel ? previewState.channel.imageUrl : ""} alt="avatar" />
             </AvatarDiv>
 
             <ChannelInfoDiv>
               <ChannelName>
-                도란밤
+                {previewState.channel ? previewState.channel.name : ""}
               </ChannelName>
               <Subscribers>
-                구독자 2.54천명
+                {previewState.channel ?
+                  (!previewState.channel.hiddenSubscriberCount ?
+                    "구독자 " + previewState.channel.subscriberCount + "명" : "" ) : ""}
               </Subscribers>
 
               <ChannelIntro>
-                프로필 사진 출처 : 마이 웹툰캐 app<br/>
-                영상 출처 : 진용진 머니게임
+                {previewState.video ? previewState.video.description.split('\n').map(line => {
+                    return (<span>{line}<br/></span>)
+                  }) : ""}
               </ChannelIntro>
             </ChannelInfoDiv>
             <SubscribeDiv>
@@ -265,32 +314,15 @@ function YoutubePreview() {
             </SubscribeDiv>
           </ChannelDiv>
 
-          <div className="comments">
-            <div className="comment-num">
-
-            </div>
-
-            <div className="comment">
-              <div className="avatar">
-
-              </div>
-              <div className="comment-content">
-                <div className="comment-header">
-
-                </div>
-                <div className="comment-body">
-
-                </div>
-                <div className="likes">
-
-                </div>
-              </div>
-            </div>
-
+          <CommentGroup>
+            <TotalComment>
+              댓글 30개
+            </TotalComment>
             <Comment />
-            {/* and so on... */}
+            <Comment />
+            <Comment />
+          </CommentGroup>
 
-          </div>
         </Content>
       </ContentContainer>
     </Preview>
