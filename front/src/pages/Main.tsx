@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components'
 import { ReactComponent as StopImage} from '../stop.svg'
+import { ReactComponent as ExampleImage} from '../ExampleImage.svg'
 import Percentage from './Percentage';
 
 function Main() {
@@ -25,13 +26,38 @@ function Main() {
               넘쳐나는 혐오 표현에서 벗어나 마음의 평화를 찾아보세요
             </SmallText>
           </div>
+          <ExampleImage/>
         </div>
         <Percentage/>
+
+        <div className="Ex">
+          <div className="info-text">
+            <BigText>
+            보기 싫은 댓글 없는 클린한 유튜브를 경험해보세요
+            </BigText>
+            <SmallText>
+            보고 싶은 영상의 url을 입력하거나 샘플 영상 url을 선택해보세요<br/>
+            데모 버전이 마음에 드신다면 크롬 익스텐션을 이용해보세요
+            </SmallText>
+          </div>
+          <ButtonBox>
+            <SubmitBtn>
+              개훌륭 강형욱 분노
+            </SubmitBtn>
+            <SubmitBtn>
+              파이 머니게임 리뷰
+            </SubmitBtn>
+            <SubmitBtn>
+              보겸 고소 영상
+            </SubmitBtn>
+          </ButtonBox>
+        </div>
+
         <footer>
-        <StopImage height="auto" />
+        <StopImage max-height="30"/>
         <div className="foot-text">
           <div>
-            혐오 표현이 없는  <br></br>클린한 인터넷 문화를 응원합니다
+            혐오 표현이 없는  <br/>클린한 인터넷 문화를 응원합니다
           </div>
           <div className="copy">
             Copyright © 2021 SW maestro - Minchodan <br></br>
@@ -43,6 +69,31 @@ function Main() {
     </Container>
   );
 }
+
+const ButtonBox = styled.div`
+  display : flex;
+  justify-content : space-around;
+  align-items : center;
+  width : 600px;
+
+`
+
+const SubmitBtn = styled.a`
+    width: 160px;
+    height: 56px;
+    background: linear-gradient(180deg, #9FE7B3 0%, #97D9B9 100%);
+    border-radius: 8px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 17px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+`
 
 const MainComponent = styled.div`
   width: 1440px;
@@ -63,7 +114,6 @@ const Container = styled.div`
     width : 1440px;
   }
   footer{
-    position : fixed;
     display : flex;
     align-items : center;
     background-color : white;
@@ -77,12 +127,22 @@ const Container = styled.div`
   }
   .info{
     display : flex;
+    justify-content : space-between;
     height : 300px;
     margin: 80px;
+    margin-bottom : 130px;
   }
   .info-text{
     display : flex;
     flex-direction : column;
+  }
+  .Ex{
+    display : flex;
+    justify-content : space-between;
+    height : 140px;
+    margin : 80px;
+    margin-top : 130px;
+
   }
   .foot-text{
   display : flex;
@@ -132,4 +192,5 @@ const SmallText=styled.div`
   color: #1F2041;
   opacity : 0.5;
 `
+
 export default Main;
