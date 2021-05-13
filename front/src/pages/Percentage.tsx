@@ -87,6 +87,7 @@ const SubmitBtn = styled.a`
 
     text-transform: uppercase;
     color: #FFFFFF;
+    cursor: pointer;
 `
 
 const SearchWrapper = styled.div`
@@ -116,7 +117,7 @@ const ShowPercentage = styled.span`
 
 function Percentage() {
   const [sentence, setSentence] = useState<string>('')
-  const [percentage, setPercentage] = useState<number>(0)
+  const [percentage, setPercentage] = useState<string>('계산중')
   const [visibilty, setVisiblity] = useState<boolean>(false)
 
   axios.defaults.xsrfCookieName = 'csrftoken';
@@ -136,7 +137,8 @@ function Percentage() {
 
   async function onSubmit() {
     if(!visibilty) setVisiblity(true);
-    setPercentage(await getPercentage(sentence));
+    let result = await getPercentage(sentence)
+    setPercentage(result.toFixed(2)+'%');
   }
 
   return (
@@ -153,7 +155,7 @@ function Percentage() {
         <SubmitBtn onClick={onSubmit}> 확인해보기</SubmitBtn>
       </SearchWrapper>
       { visibilty && 
-        <Result>입력하신 댓글의 혐오 지수는&nbsp;<ShowPercentage> {percentage}% </ShowPercentage>&nbsp;입니다</Result>
+        <Result>입력하신 댓글의 혐오 지수는&nbsp;<ShowPercentage> {percentage} </ShowPercentage>&nbsp;입니다</Result>
       }
     </Second>
   );
