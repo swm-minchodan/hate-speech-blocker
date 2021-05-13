@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
 import { faMicrophone } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 
 import bars from '../img/bars.png';
 import youtubekr from '../img/youtubekr.png';
@@ -130,12 +131,12 @@ const ShareImg = styled.img`
 
 function YoutubePreview() {
   useEffect( () => {
-    async function fetchTest() {
-      const res = await fetch('/posts');
-      const posts = await res.json();
-      console.log(posts);
+    async function axiosTest() {
+      const result = await axios.post(`/getvideoinfo`,{ url : '3ScrmGDJjqk'})
+        .then(res => res.data);
+      console.log(result);
     }
-    fetchTest();
+    axiosTest();
   }, [])
 
   return (
