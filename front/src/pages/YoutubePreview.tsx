@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
@@ -10,6 +10,15 @@ const Header = styled.div`
   `;
 
 function YoutubePreview() {
+  useEffect( () => {
+    async function fetchTest() {
+      const res = await fetch('/posts');
+      const posts = await res.json();
+      console.log(posts);
+    }
+    fetchTest();
+  }, [])
+
   return (
     <>
       <Header>

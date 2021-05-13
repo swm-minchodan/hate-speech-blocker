@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components'
-import Percentage from './Percentage'
-import{ReactComponent as  StopImage} from '../stop.svg' 
+import { ReactComponent as StopImage} from '../stop.svg'
+import Percentage from './Percentage';
+
 function Main() {
   return (
     <Container>
@@ -12,7 +13,7 @@ function Main() {
           <div id="head-text">혐오 표현 필터링</div>
         </div>
       </header>
-      <main>
+      <MainComponent>
         <div className="info">
           <div className="info-text">
             <BigText>
@@ -24,14 +25,8 @@ function Main() {
               넘쳐나는 혐오 표현에서 벗어나 마음의 평화를 찾아보세요
             </SmallText>
           </div>
-
-
         </div>
-        
-        <div>
         <Percentage/>
-        </div>
-
         <footer>
         <StopImage height="auto" />
         <div className="foot-text">
@@ -42,19 +37,22 @@ function Main() {
             Copyright © 2021 SW maestro - Minchodan <br></br>
             개발기 및 코드 구경가기
           </div >
-
         </div>
-        
         </footer>
-      </main>
-     
-      
+      </MainComponent>
     </Container>
-
   );
 }
 
+const MainComponent = styled.div`
+  width: 1440px;
+`
+
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   header{
     //position : fixed;
     display : flex;
@@ -62,6 +60,7 @@ const Container = styled.div`
     height: 80px;
     max-height: 70px;
     margin : 30px;
+    width : 1440px;
   }
   footer{
     position : fixed;
