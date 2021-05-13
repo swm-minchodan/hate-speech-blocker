@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import StopImage from '../images/stop.svg'
 import { ReactComponent as ExampleImage} from '../images/ExampleImage.svg'
 import Percentage from './Percentage';
+import UrlLink from './UrlLink';
 import decorator2Svg from '../images/decorator2.svg';
 import decorator1Svg from '../images/decorator1.svg';
 import decorator3Svg from '../images/decorator3.svg';
@@ -47,7 +48,7 @@ function Main() {
             </SmallText>
           </div>
           <ButtonBox>
-            <SubmitBtn>
+            <SubmitBtn >
               개훌륭 강형욱 분노
             </SubmitBtn>
             <SubmitBtn>
@@ -59,6 +60,7 @@ function Main() {
           </ButtonBox>
         </div>
 
+        <UrlLink/>
       </MainComponent>
       <Footer>
         <FooterLogo src={StopImage} />
@@ -162,8 +164,7 @@ const Container = styled.div`
     display : flex;
     justify-content : space-between;
     height : 140px;
-    margin : 80px;
-    margin-top : 130px;
+    margin : 130px 80px 0px 80px;
 
   }
   .foot-text{
@@ -219,16 +220,17 @@ const SmallText=styled.div`
 `
 const Decorator1 = styled.img`
   position: absolute;
-  width: 517.11px;
-  height: 460.83px;
+  width: 600px;
+  height: 500px;
   left: 400px;
   top: -100px;
+  z-index: -1;
 `
 
 const Decorator2 = styled.img`
   position: absolute;
-  width: 503.6px;
-  height: 386.29px;
+  width: 600px;
+  height: 450px;
   left: 77.3px;
   top: 330px;
 `
@@ -238,7 +240,7 @@ const Decorator3 = styled.img`
   width: 400px;
   height: 300px;
   right: -20px;
-  bottom: 0px;
+  bottom: 100px;
 `
 
 export default Main;
