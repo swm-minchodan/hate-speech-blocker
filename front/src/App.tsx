@@ -9,7 +9,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Main} />
-        <Route path="/preview" exact component={YoutubePreview} />
+        <Route path="/preview/:url" exact component={YoutubePreview} />
       </Switch>
     </BrowserRouter>
   );

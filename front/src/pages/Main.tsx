@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import styled from 'styled-components'
 import decorator2Svg from '../images/decorator2.svg';
 import decorator1Svg from '../images/decorator1.svg';
@@ -10,7 +11,8 @@ import Information from './Information'
 import Example from './Example'
 import Footer from './Footer'
 
-function Main() {
+
+const Main: FC<RouteComponentProps> = (props: RouteComponentProps<{}>) => {
   return (
     <Container>
       <Header/>
@@ -20,7 +22,7 @@ function Main() {
         <Decorator3 src={decorator3Svg} />
         <Information/>
         <Percentage/>
-        <Example/>
+        <Example {...props} />
         <UrlLink/>
       </MainComponent>
       <Footer/>

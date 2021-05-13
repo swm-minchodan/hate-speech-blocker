@@ -1,7 +1,14 @@
-import React from 'react';
 import styled from 'styled-components'
+import React, { FC } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 
-function Example() {
+
+const Example: FC<RouteComponentProps> = ({ history }) => {
+
+  const goPreview = (url:string) => {
+    history.push('/preview/'+url);
+  }
+
   return(
     <ExampleWrapper>
       <InfoText>
@@ -14,13 +21,13 @@ function Example() {
         </SmallText>
       </InfoText>
       <ButtonBox>
-        <SubmitBtn >
+        <SubmitBtn onClick={() => goPreview('b8xLkUUyQyo')}>
           개훌륭 강형욱 분노
         </SubmitBtn>
-        <SubmitBtn>
+        <SubmitBtn onClick={() => goPreview('ZCWdMCV32vI')}>
           파이 머니게임 리뷰
         </SubmitBtn>
-        <SubmitBtn>
+        <SubmitBtn onClick={() => goPreview('3ScrmGDJjqk')}>
           보겸 고소 영상
         </SubmitBtn>
       </ButtonBox>
