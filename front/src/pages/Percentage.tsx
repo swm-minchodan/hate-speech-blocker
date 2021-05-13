@@ -1,19 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import decoratorSvg from '../images/decorator2.svg';
 
 const Second = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-`
-const Decorator = styled.img`
-    position: absolute;
-    width: 503.6px;
-    height: 386.29px;
-    left: 77.3px;
-    top: 0px;
+    margin: 0 80px;
 `
 
 const BigText = styled.div`
@@ -74,6 +67,7 @@ const SearchBox = styled.input`
 
     color: rgba(31, 32, 65, 0.6);
     border: none;
+    z-index: 2;
 `
 
 const SubmitBtn = styled.a`
@@ -143,15 +137,10 @@ function Percentage() {
   async function onSubmit() {
     if(!visibilty) setVisiblity(true);
     setPercentage(await getPercentage(sentence));
-    //dummy
-    const result = await axios.post(`/getcomment`,{ url : '3ScrmGDJjqk'})
-    .then(res => res.data);
-    console.log(result);
   }
 
   return (
     <Second>
-      <Decorator src={decoratorSvg} />
       <BigText>저희 엔진의 필터링 효과를 체험해보세요</BigText>
       <SmallText>입력한 댓글의 혐오 퍼센티지를 보여드립니다</SmallText>
       <SearchWrapper>

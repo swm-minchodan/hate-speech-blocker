@@ -8,10 +8,16 @@ import json
 
 threshold = 80
 
+test = 0
+
+def readModel():
+  global test
+  test = test + 1
+
 @ensure_csrf_cookie
 @method_decorator(csrf_exempt, name='dispatch')
-# Create your views here.
 
+# Create your views here.
 def filtering(sentence):
     return 0
 
@@ -19,7 +25,8 @@ def get_percentage(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         sentence = data['sentence']
-        return JsonResponse(len(sentence), safe=False)
+        readModel()
+        return JsonResponse(test, safe=False)
 
 def get_video_info(request):
     if request.method == 'POST':
