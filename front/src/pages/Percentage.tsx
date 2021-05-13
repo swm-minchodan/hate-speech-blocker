@@ -1,11 +1,54 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import decoratorSvg from '../images/decorator2.svg';
 
 const Second = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+`
+const Decorator = styled.img`
+    position: absolute;
+    width: 503.6px;
+    height: 386.29px;
+    left: 77.3px;
+    top: 0px;
+`
+
+const BigText = styled.div`
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 56px;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: rgba(31, 32, 65, 0.75);
+
+    mix-blend-mode: normal;
+    margin-bottom: 12px;
+`
+
+const SmallText = styled.div`
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 19px;
+    line-height: 18px;
+
+    display: flex;
+    align-items: center;
+    text-align: right;
+
+    color: #1F2041;
+
+    mix-blend-mode: normal;
+    opacity: 0.5;
+    margin-bottom: 28px;
 `
 
 const SearchBox = styled.input`
@@ -87,7 +130,7 @@ function Percentage() {
 
 
   async function getPercentage(sentence: string) : Promise<number> { 
-    return await axios.post(`/percentage`,{sentence})
+    return await axios.post(`/percentage`,{ sentence })
     .then(res => res.data);
   }
 
@@ -100,10 +143,17 @@ function Percentage() {
   async function onSubmit() {
     if(!visibilty) setVisiblity(true);
     setPercentage(await getPercentage(sentence));
+    //dummy
+    const result = await axios.post(`/getcomment`,{ url : '3ScrmGDJjqk'})
+    .then(res => res.data);
+    console.log(result);
   }
 
   return (
     <Second>
+      <Decorator src={decoratorSvg} />
+      <BigText>저희 엔진의 필터링 효과를 체험해보세요</BigText>
+      <SmallText>입력한 댓글의 혐오 퍼센티지를 보여드립니다</SmallText>
       <SearchWrapper>
         <SearchBox
             placeholder="나쁜 댓글을 입력하고 혐오 퍼센티지를 확인해보세요"
