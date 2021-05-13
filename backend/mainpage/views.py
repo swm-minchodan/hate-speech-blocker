@@ -5,14 +5,35 @@ from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from django.utils.decorators import method_decorator
 from googleapiclient.discovery import build
 import json
+from konlpy.tag import Okt
+from tensorflow import keras
+import pickle
+import os
 
-threshold = 80
+threshold = 50
 
-test = 0
+okt = Okt()
+k_tokenizer = pickle.load(open(os.path.join(os.getcwd(),"AI/keras_tokenizer.pkl"), "rb"))
+model = keras.models.load_model(os.path.join(os.getcwd(),"AI/hate_model.h5"))
 
-def readModel():
-  global test
-  test = test + 1
+def tokenize(doc):
+    return [okt.pos(doc, norm=True, stem=True)]
+
+def hate_evaluate(string):
+    data = tokenize(string)
+    words = []
+    for x in data[0]:
+        if x[1] not in ['Josa'] and x[1] not in ['Punctuation']:
+            words.append(x[0])
+    print(words)
+    sequences = k_tokenizer.texts_to_sequences([words])
+    x = keras.preprocessing.sequence.pad_sequences(sequences, maxlen=100)
+    
+    pred_test = model.predict(x,verbose=1)
+    result_array = (1 - pred_test)*100
+    return float(result_array[0][0])
+
+hate_evaluate('');
 
 @ensure_csrf_cookie
 @method_decorator(csrf_exempt, name='dispatch')
@@ -25,8 +46,8 @@ def get_percentage(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         sentence = data['sentence']
-        readModel()
-        return JsonResponse(test, safe=False)
+        result = hate_evaluate(sentence)
+        return JsonResponse(result, safe=False)
 
 def get_video_info(request):
     if request.method == 'POST':

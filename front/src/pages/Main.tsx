@@ -106,6 +106,7 @@ const SubmitBtn = styled.a`
     text-transform: uppercase;
     color: #FFFFFF;
     z-index: 2;
+    cursor: pointer;
 `
 
 const MainComponent = styled.div`

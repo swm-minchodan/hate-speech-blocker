@@ -35,6 +35,7 @@ const SubmitBtn = styled.a`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `
 
 const SmallText = styled.div`
