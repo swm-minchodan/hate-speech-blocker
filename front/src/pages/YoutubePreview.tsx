@@ -18,13 +18,17 @@ import Comment from './components/Comment';
 const Preview = styled.div`
     font-family: Roboto, Arial, sans-serif;
     background-color: #f9f9f9;
-    height: 100%;
+    height: 2000px;
+  `;
+const HeaderContainer = styled.div`
+    position: fixed;
   `;
 const Header = styled.div`
     background-color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 98vw;
     height: 56px;
     padding: 0 16px;
   `;
@@ -63,6 +67,7 @@ const YoutubeRight = styled.img`
 
 // Content
 const ContentContainer = styled.div`
+    padding-top: 56px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -128,6 +133,55 @@ const ShareImg = styled.img`
     height: 35px;
   `;
 
+// Channel Info
+const ChannelDiv = styled.div`
+    display: flex;
+    padding: 15px 0 10px;
+    min-height: 80px;
+    border-bottom: 1px solid #e0e0e0;
+  `;
+const AvatarDiv = styled.div`
+    display: flex;
+    align-items: start;
+    width: 65px;
+  `;
+const Avatar = styled.img`
+    height: 50px;
+    border-radius: 25px;
+  `;
+const ChannelInfoDiv = styled.div`
+    width: 100%;
+  `;
+const ChannelName = styled.div`
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 10px;
+  `;
+const Subscribers = styled.div`
+    font-size: 12px;
+    color: #606060;
+  `;
+const ChannelIntro = styled.div`
+    font-size: 14px;
+    font-weight: 500;
+    margin: 20px 0 15px;
+    line-height: 1.3;
+  `;
+const SubscribeDiv = styled.div`
+    width: 80px;
+  `;
+const SubscribeBtn = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+    width: 60px;
+    height: 25px;
+    background-color: #cc0000;
+    color: white;
+    padding: 8px 10px;
+  `;
+
 
 function YoutubePreview() {
   useEffect( () => {
@@ -141,20 +195,22 @@ function YoutubePreview() {
 
   return (
     <Preview>
-      <Header>
-        <VerticalCenter>
-          <Bars src={bars} alt="bars" />
-          <YoutubeKR src={youtubekr} alt="logo" />
-        </VerticalCenter>
-        <VerticalCenter>
-          <SearchBar type="text" placeholder="검색" />
-          <SearchBtn src={search} alt="search" />
-          <MicIcon>
-            <FontAwesomeIcon icon={faMicrophone} />
-          </MicIcon>
-        </VerticalCenter>
-        <YoutubeRight src={youtubeRight} alt="right-btn-family" />
-      </Header>
+      <HeaderContainer>
+        <Header>
+          <VerticalCenter>
+            <Bars src={bars} alt="bars" />
+            <YoutubeKR src={youtubekr} alt="logo" />
+          </VerticalCenter>
+          <VerticalCenter>
+            <SearchBar type="text" placeholder="검색" />
+            <SearchBtn src={search} alt="search" />
+            <MicIcon>
+              <FontAwesomeIcon icon={faMicrophone} />
+            </MicIcon>
+          </VerticalCenter>
+          <YoutubeRight src={youtubeRight} alt="right-btn-family" />
+        </Header>
+      </HeaderContainer>
 
       <ContentContainer>
         <Content>
@@ -186,9 +242,28 @@ function YoutubePreview() {
             </InfoRightGroup>
           </InfoGroup>
 
-          <div className="author-profile">
+          <ChannelDiv>
+            <AvatarDiv>
+              <Avatar src="https://yt3.ggpht.com/ytc/AAUvwniilTW5nRRIbfnyw7_NAxnMhD8g7MkL6fMMkZZ8hg=s176-c-k-c0x00ffffff-no-rj" alt="avatar" />
+            </AvatarDiv>
 
-          </div>
+            <ChannelInfoDiv>
+              <ChannelName>
+                도란밤
+              </ChannelName>
+              <Subscribers>
+                구독자 2.54천명
+              </Subscribers>
+
+              <ChannelIntro>
+                프로필 사진 출처 : 마이 웹툰캐 app<br/>
+                영상 출처 : 진용진 머니게임
+              </ChannelIntro>
+            </ChannelInfoDiv>
+            <SubscribeDiv>
+              <SubscribeBtn>구독</SubscribeBtn>
+            </SubscribeDiv>
+          </ChannelDiv>
 
           <div className="comments">
             <div className="comment-num">
@@ -213,7 +288,6 @@ function YoutubePreview() {
             </div>
 
             <Comment />
-
             {/* and so on... */}
 
           </div>
