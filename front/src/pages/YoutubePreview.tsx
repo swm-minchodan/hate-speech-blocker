@@ -213,7 +213,8 @@ function YoutubePreview() {
             </div>
 
             <Comment />
-
+            <Comment />
+            <Comment />
             {/* and so on... */}
 
           </div>
